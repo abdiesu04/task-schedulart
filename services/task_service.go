@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/task-schedulart/models"
@@ -87,4 +88,74 @@ func (s *TaskService) GetTasksByTags(tags []string) ([]models.Task, error) {
 	var tasks []models.Task
 	err := s.db.Where("tags && ?", tags).Find(&tasks).Error
 	return tasks, err
+}
+
+// GetTasksWithPagination returns paginated tasks with filters
+func (s *TaskService) GetTasksWithPagination(status, priority string, tags []string, search, sortBy, order string, page, pageSize int) ([]models.Task, int64, error) {
+	var tasks []models.Task
+	var total int64
+	offset := (page - 1) * pageSize
+
+	query := s.db.Model(&models.Task{})
+
+	// Apply filters
+	if status != "" {
+		query = query.Where("status = ?", status)
+	}
+	if priority != "" {
+		query = query.Where("priority = ?", priority)
+	}
+	if len(tags) > 0 {
+		query = query.Where("tags && ?", tags)
+	}
+	if search != "" {
+		query = query.Where("name ILIKE ? OR description ILIKE ?", "%"+search+"%", "%"+search+"%")
+	}
+
+	// Get total count before pagination
+	if err := query.Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
+	// Apply sorting 
+	if sortBy != "" {
+		if order != "asc" {
+			order = "desc"
+		}
+		query = query.Order(fmt.Sprintf("%s %s", sortBy, order))
+	}
+
+	// Apply pagination
+	err := query.Offset(offset).Limit(pageSize).Find(&tasks).Error
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return tasks, total, nil
+}
+
+// GetTaskByID retrieves a task by its ID
+func (s *TaskService) GetTaskByID(taskID uint) (*models.Task, error) {
+	var task models.Task
+	if err := s.db.First(&task, taskID).Error; err != nil {
+		return nil, err
+	}
+	return &task, nil
+}
+
+// UpdateTask updates an existing task
+func (s *TaskService) UpdateTask(task *models.Task) error {
+	if task.ID == 0 {
+		return errors.New("task ID is required")
+	}
+
+	// Ensure the task exists
+	var existingTask models.Task
+	if err := s.db.First(&existingTask, task.ID).Error; err != nil {
+		return err
+	}
+
+	// Update the task
+	task.UpdatedAt = time.Now()
+	return s.db.Model(task).Updates(task).Error
 }

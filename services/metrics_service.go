@@ -1,8 +1,11 @@
 package services
 
 import (
+	"net/http"
+
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type MetricsService struct {
@@ -88,4 +91,9 @@ func (m *MetricsService) UpdateTaskStatusMetric(status string, count float64) {
 // UpdateTaskPriorityMetric updates the count for a specific task priority
 func (m *MetricsService) UpdateTaskPriorityMetric(priority string, count float64) {
 	m.TasksByPriority.WithLabelValues(priority).Set(count)
+}
+
+// Handler returns an HTTP handler for exposing Prometheus metrics
+func (s *MetricsService) Handler() http.Handler {
+	return promhttp.Handler()
 }

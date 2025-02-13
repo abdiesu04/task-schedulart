@@ -14,7 +14,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/abdiesu04/task-schedulart">
-    <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" alt="Task Schedulart" width="200" height="200" style="border-radius: 20px;">
+    <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" alt="Task Schedulart" width="200" height="200" style="border-radius: 20px;">
   </a>
 
   <h3 align="center">Task Schedulart</h3>
@@ -68,6 +68,54 @@ Task Schedulart is a robust, scalable task scheduling system designed for modern
 ## ✨ Features
 
 ### Core Features
+
+- **🧠 AI-Powered Task Management**
+  - Smart task scheduling based on historical performance
+  - Productivity pattern analysis
+  - Automated priority scoring
+  - Task completion prediction
+  - Intelligent workload balancing
+  - Learning from task patterns
+  - Optimal scheduling suggestions
+  - Performance analytics
+  - Resource optimization
+  - Smart deadline management
+
+- **🤝 Advanced Collaboration**
+  - Team workspaces
+  - Real-time task comments
+  - @mentions and notifications
+  - Task sharing between teams
+  - Activity tracking
+  - Team analytics
+  - Role-based permissions
+  - Team performance metrics
+  - Collaborative task editing
+  - Shared task templates
+
+- **📢 Multi-Channel Notifications**
+  - Email notifications
+  - Slack integration
+  - Custom webhooks
+  - Push notifications
+  - Customizable templates
+  - Event-based triggers
+  - Notification preferences
+  - Delivery status tracking
+  - Smart notification batching
+  - Priority-based delivery
+
+- **📊 Enhanced Analytics**
+  - Task completion trends
+  - Team performance metrics
+  - Productivity heatmaps
+  - Tag-based analytics
+  - Custom report generation
+  - Export capabilities
+  - Real-time dashboards
+  - Historical data analysis
+  - Predictive analytics
+  - Resource utilization tracking
 
 - **🔄 Advanced Task Management**
   - Priority-based scheduling

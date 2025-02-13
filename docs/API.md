@@ -506,4 +506,238 @@ HTTP Status Codes:
    - Implement HSTS
    - Use secure cookies
 
-[Previous content remains the same...] 
+### AI and Analytics
+
+#### Get Task Analytics
+
+```http
+GET /api/analytics/tasks
+```
+
+Query Parameters:
+- `start_date`: Start date for analysis (ISO 8601)
+- `end_date`: End date for analysis (ISO 8601)
+
+Response:
+```json
+{
+  "completionRate": 85.5,
+  "averageCompletion": 120.5,
+  "productivityHours": {
+    "9": 0.95,
+    "10": 0.87,
+    "14": 0.92
+  },
+  "tagPerformance": {
+    "urgent": 78.5,
+    "feature": 92.3
+  },
+  "priorityDistribution": {
+    "high": 45,
+    "medium": 30,
+    "low": 25
+  },
+  "trendAnalysis": [
+    {
+      "date": "2024-03-01T00:00:00Z",
+      "value": 82.5
+    }
+  ]
+}
+```
+
+#### Optimize Task Schedule
+
+```http
+POST /api/tasks/optimize
+```
+
+Response:
+```json
+{
+  "optimized": true,
+  "changes": [
+    {
+      "taskId": 1,
+      "oldSchedule": "2024-03-19T10:00:00Z",
+      "newSchedule": "2024-03-19T14:00:00Z",
+      "reason": "Better productivity hour match"
+    }
+  ]
+}
+```
+
+### Team Collaboration
+
+#### Create Team
+
+```http
+POST /api/teams
+Content-Type: application/json
+```
+
+Request Body:
+```json
+{
+  "name": "Development Team",
+  "description": "Main development team"
+}
+```
+
+Response:
+```json
+{
+  "id": 1,
+  "name": "Development Team",
+  "description": "Main development team",
+  "createdAt": "2024-03-19T10:00:00Z",
+  "updatedAt": "2024-03-19T10:00:00Z"
+}
+```
+
+#### Invite Team Member
+
+```http
+POST /api/teams/:id/invite
+Content-Type: application/json
+```
+
+Request Body:
+```json
+{
+  "userId": 2,
+  "role": "member"
+}
+```
+
+Response:
+```json
+{
+  "message": "Invitation sent successfully"
+}
+```
+
+#### Add Task Comment
+
+```http
+POST /api/tasks/:id/comments
+Content-Type: application/json
+```
+
+Request Body:
+```json
+{
+  "content": "Great progress! @john please review",
+  "mentions": [2]
+}
+```
+
+Response:
+```json
+{
+  "id": 1,
+  "taskId": 123,
+  "userId": 1,
+  "content": "Great progress! @john please review",
+  "mentions": [2],
+  "createdAt": "2024-03-19T10:00:00Z",
+  "updatedAt": "2024-03-19T10:00:00Z"
+}
+```
+
+#### Get Task Comments
+
+```http
+GET /api/tasks/:id/comments
+```
+
+Response:
+```json
+[
+  {
+    "id": 1,
+    "taskId": 123,
+    "userId": 1,
+    "content": "Great progress! @john please review",
+    "mentions": [2],
+    "createdAt": "2024-03-19T10:00:00Z",
+    "updatedAt": "2024-03-19T10:00:00Z"
+  }
+]
+```
+
+### Notifications
+
+#### Configure Notification Channel
+
+```http
+POST /api/notifications/channels
+Content-Type: application/json
+```
+
+Request Body:
+```json
+{
+  "type": "slack",
+  "config": {
+    "webhookUrl": "https://hooks.slack.com/...",
+    "channel": "#tasks"
+  },
+  "enabled": true
+}
+```
+
+Response:
+```json
+{
+  "message": "Channel configured successfully"
+}
+```
+
+#### Create Notification Template
+
+```http
+POST /api/notifications/templates
+Content-Type: application/json
+```
+
+Request Body:
+```json
+{
+  "type": "task_completed",
+  "subject": "Task Completed: {{task.name}}",
+  "template": "Task {{task.name}} was completed by {{user.name}} at {{timestamp}}"
+}
+```
+
+Response:
+```json
+{
+  "id": 1,
+  "type": "task_completed",
+  "subject": "Task Completed: {{task.name}}",
+  "template": "Task {{task.name}} was completed by {{user.name}} at {{timestamp}}"
+}
+```
+
+### Activity Tracking
+
+#### Get Task Activity
+
+```http
+GET /api/tasks/:id/activity
+```
+
+Response:
+```json
+[
+  {
+    "id": 1,
+    "taskId": 123,
+    "userId": 1,
+    "action": "status_changed",
+    "details": "Status changed from pending to completed",
+    "timestamp": "2024-03-19T10:00:00Z"
+  }
+]
+``` 
