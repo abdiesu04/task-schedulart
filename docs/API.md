@@ -8,17 +8,112 @@ http://localhost:8080/api
 
 ## Authentication
 
-JWT-based authentication is implemented. Include the JWT token in the Authorization header:
+JWT-based authentication is required for most endpoints. Include the JWT token in the Authorization header:
 
 ```http
 Authorization: Bearer <your_jwt_token>
 ```
 
+### Authentication Endpoints
+
+#### Register User
+
+```http
+POST /auth/register
+Content-Type: application/json
+```
+
+Request Body:
+```json
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "secure_password123"
+}
+```
+
+Response:
+```json
+{
+  "id": 1,
+  "username": "john_doe",
+  "email": "john@example.com",
+  "role": "user",
+  "createdAt": "2024-03-19T10:00:00Z"
+}
+```
+
+#### Login
+
+```http
+POST /auth/login
+Content-Type: application/json
+```
+
+Request Body:
+```json
+{
+  "username": "john_doe",
+  "password": "secure_password123"
+}
+```
+
+Response:
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIs...",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIs...",
+  "token_type": "Bearer",
+  "expires_in": 86400
+}
+```
+
+#### Refresh Token
+
+```http
+POST /auth/refresh
+Content-Type: application/json
+Authorization: Bearer <refresh_token>
+```
+
+Response:
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIs...",
+  "token_type": "Bearer",
+  "expires_in": 86400
+}
+```
+
 ## Rate Limiting
 
-Rate limiting is implemented with the following limits:
-- 100 requests per minute for authenticated users
-- 20 requests per minute for unauthenticated users
+Rate limiting is implemented using a token bucket algorithm with the following limits:
+- Authenticated users: 100 requests per minute
+- Unauthenticated users: 20 requests per minute
+
+Rate limit headers are included in all responses:
+```http
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1679233922
+```
+
+When rate limit is exceeded:
+```json
+{
+  "error": "Rate limit exceeded",
+  "retry_after": "60s"
+}
+```
+
+## Role-Based Access Control
+
+The following roles are available:
+- `admin`: Full access to all endpoints
+- `user`: Access to own tasks and limited operations
+- `viewer`: Read-only access to tasks
+
+Required roles are specified in the documentation for each endpoint.
 
 ## Pagination
 
@@ -376,5 +471,39 @@ HTTP Status Codes:
 2. Use pagination for large result sets
 3. Include error handling for all API calls
 4. Use WebSocket for real-time updates
-5. Monitor rate limits
-6. Handle authentication token expiration 
+5. Monitor rate limits using response headers
+6. Handle authentication token expiration
+7. Implement token refresh before expiration
+8. Use appropriate roles for different operations
+9. Store tokens securely
+10. Log out when finished
+
+## Security Considerations
+
+1. **Token Storage**:
+   - Store tokens in secure HTTP-only cookies or secure local storage
+   - Never store tokens in plain text
+   - Clear tokens on logout
+
+2. **Password Requirements**:
+   - Minimum 8 characters
+   - Mix of uppercase and lowercase letters
+   - Include numbers and special characters
+   - No common dictionary words
+
+3. **Rate Limiting**:
+   - Implement exponential backoff when retrying
+   - Monitor rate limit headers
+   - Pre-emptively wait when approaching limits
+
+4. **Error Handling**:
+   - Never expose sensitive information in error messages
+   - Log security-related errors
+   - Implement proper validation
+
+5. **HTTPS**:
+   - Always use HTTPS in production
+   - Implement HSTS
+   - Use secure cookies
+
+[Previous content remains the same...] 
