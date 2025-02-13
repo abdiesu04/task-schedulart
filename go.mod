@@ -11,6 +11,10 @@ require (
 	go.uber.org/zap v1.26.0
 	gorm.io/driver/postgres v1.5.7
 	gorm.io/gorm v1.25.7
+	github.com/gorilla/websocket v1.5.1
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	golang.org/x/crypto v0.31.0
+	github.com/prometheus/client_golang v1.19.0
 )
 
 require (
@@ -40,7 +44,6 @@ require (
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.12.0 // indirect
-	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/net v0.33.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect

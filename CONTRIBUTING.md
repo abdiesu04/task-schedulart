@@ -29,7 +29,7 @@ In short, when you submit code changes, your submissions are understood to be un
 
 ## Report bugs using Github's [issue tracker](https://github.com/yourusername/task-schedulart/issues)
 
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/yourusername/task-schedulart/issues/new).
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/abdiesu04/task-schedulart/issues/new).
 
 ## Write bug reports with detail, background, and sample code
 

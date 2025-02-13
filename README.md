@@ -1,18 +1,70 @@
-# Task Schedulart 📅
+# Task Schedulart
+
+<div align="center">
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/abdiesu04/task-schedulart)](https://goreportcard.com/report/github.com/abdiesu04/task-schedulart)
 [![GoDoc](https://godoc.org/github.com/abdiesu04/task-schedulart?status.svg)](https://godoc.org/github.com/abdiesu04/task-schedulart)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](CONTRIBUTING.md)
+[![GitHub Stars](https://img.shields.io/github/stars/abdiesu04/task-schedulart.svg)](https://github.com/abdiesu04/task-schedulart/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/abdiesu04/task-schedulart.svg)](https://github.com/abdiesu04/task-schedulart/issues)
 
+<br />
 <div align="center">
-    <img src="docs/images/logo.png" alt="Task Schedulart Logo" width="200"/>
-    <p>A modern, cloud-native task scheduling and worker system built with Go</p>
+  <a href="https://github.com/abdiesu04/task-schedulart">
+    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" alt="Task Schedulart" width="200" height="200" style="border-radius: 20px;">
+  </a>
+
+  <h3 align="center">Task Schedulart</h3>
+
+  <p align="center">
+    A modern, cloud-native task scheduling and worker system built with Go
+    <br />
+    <a href="#documentation"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="#quick-start">Quick Start</a>
+    ·
+    <a href="https://github.com/abdiesu04/task-schedulart/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/abdiesu04/task-schedulart/issues">Request Feature</a>
+  </p>
 </div>
 
-## 🌟 Features
+</div>
+
+## 📋 Table of Contents
+
+- [About](#about)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [API Documentation](#api-documentation)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgments](#acknowledgments)
+
+## 🚀 About
+
+Task Schedulart is a robust, scalable task scheduling system designed for modern cloud environments. Built with Go, it provides real-time task management, monitoring, and execution capabilities with a focus on reliability and performance.
+
+### Why Task Schedulart?
+
+- **🎯 Simple yet Powerful**: Easy to use but packed with advanced features
+- **⚡ Real-time Updates**: WebSocket support for instant task status updates
+- **🔒 Secure**: Built-in authentication and authorization
+- **📊 Observable**: Comprehensive metrics and monitoring
+- **🌐 Cloud-Native**: Designed for containerized environments
+
+## ✨ Features
+
+### Core Features
 
 - **🔄 Advanced Task Management**
-  - Create, schedule, and manage tasks
   - Priority-based scheduling
   - Task retry mechanism with exponential backoff
   - Smart tag-based organization
@@ -31,7 +83,6 @@
 - **📊 Advanced Features**
   - RESTful API with OpenAPI/Swagger
   - Real-time WebSocket updates
-  - Flexible filtering and sorting
   - Rich metadata support
   - Task progress tracking
   - Batch operations
@@ -44,9 +95,8 @@
   - Prometheus metrics
   - Grafana dashboards
   - Health checks
-  - Performance analytics
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -91,9 +141,9 @@ docker run -p 8080:8080 \
   task-schedulart:latest
 ```
 
-## 📖 API Documentation
+## 📖 Documentation
 
-### Task Endpoints
+### API Examples
 
 #### Create Task
 ```http
@@ -119,7 +169,7 @@ See [API Documentation](docs/API.md) for complete details.
 ## 🏗️ Architecture
 
 <div align="center">
-    <img src="docs/images/architecture.png" alt="Architecture Diagram" width="600"/>
+  <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" alt="Architecture Diagram" width="600" style="border-radius: 10px;">
 </div>
 
 The system consists of:
@@ -127,53 +177,45 @@ The system consists of:
 - PostgreSQL Database
 - Task Scheduler
 - Worker Nodes
-
-## 🧪 Testing
-
-Run the test suite:
-```bash
-go test ./... -v
-```
-
-## 📊 Monitoring
-
-The application exposes metrics at `/metrics` for Prometheus integration.
+- WebSocket Server
+- Metrics Collector
 
 ## 🤝 Contributing
+
+We love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 1. Fork the repository
 2. Create your feature branch
 3. Commit your changes
 4. Push to the branch
-5. Create a Pull Request
+5. Open a Pull Request
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+## 📝 License
 
-## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+## 📞 Contact
+
+Abdirahman Yusuf - [@abdiesu04](https://twitter.com/abdiesu04)
+
+Project Link: [https://github.com/abdiesu04/task-schedulart](https://github.com/abdiesu04/task-schedulart)
 
 ## 🙏 Acknowledgments
 
 - [Gin Web Framework](https://github.com/gin-gonic/gin)
 - [GORM](https://gorm.io)
 - [Zap Logger](https://github.com/uber-go/zap)
-
-## 📞 Support
-
-- Create an issue
-- Join our [Discord community](https://discord.gg/yourdiscord)
-- Email: support@yourproject.com
+- [Prometheus](https://prometheus.io)
+- [WebSocket](https://github.com/gorilla/websocket)
 
 ## 🗺️ Roadmap
 
 - [x] Basic Task Management
 - [x] Docker Support
-- [ ] WebSocket Real-time Updates
-- [ ] Task Dependencies
-- [ ] Recurring Tasks
-- [ ] User Authentication
-- [ ] Task Templates
+- [x] WebSocket Real-time Updates
+- [x] Task Dependencies
+- [x] Recurring Tasks
+- [x] User Authentication
 - [ ] Mobile App
 - [ ] Email Notifications
 - [ ] Slack Integration
@@ -182,4 +224,4 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 - [ ] API Rate Limiting
 - [ ] Task Comments & Collaboration
 - [ ] SLA Monitoring
-- [ ] Multi-tenant Support 
+- [ ] Multi-tenant Support
