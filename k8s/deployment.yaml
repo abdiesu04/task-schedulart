@@ -1,0 +1,54 @@
+# Deployment configuration for the Task Schedulart application
+apiVersion: apps/v1  # API version for Kubernetes Deployments
+kind: Deployment     # Type of Kubernetes resource
+metadata:
+  name: task-schedulart  # Name of the Deployment
+  labels:
+    app: task-schedulart # Label to identify this application
+spec:
+  # Configure how many replica pods should run
+  replicas: 3  # Run 3 identical pods for high availability
+  
+  # Define how the Deployment finds which Pods to manage
+  selector:
+    matchLabels:
+      app: task-schedulart # Select pods with this label
+  
+  # Template for creating new pods
+  template:
+    metadata:
+      labels:
+        app: task-schedulart # Label applied to pods created from this template
+    spec:
+      containers:
+      - name: task-schedulart # Name of the container
+        # Docker image to use for this container
+        image: your-dockerhub-username/task-schedulart:latest
+        ports:
+        - containerPort: 8080 # Port that the container exposes
+        
+        # Resource limits and requests for the container
+        resources:
+          limits:  # Maximum resources the container can use
+            cpu: "500m"     # 500 milliCPU = 0.5 CPU cores
+            memory: "512Mi" # 512 Mebibytes of memory
+          requests: # Minimum resources the container needs
+            cpu: "200m"     # 200 milliCPU = 0.2 CPU cores
+            memory: "256Mi" # 256 Mebibytes of memory
+
+---
+# Service configuration to expose the Task Schedulart application
+apiVersion: v1    # API version for Kubernetes Services
+kind: Service    # Type of Kubernetes resource
+metadata:
+  name: task-schedulart-service # Name of the Service
+spec:
+  # LoadBalancer type creates an external load balancer in cloud providers
+  type: LoadBalancer
+  ports:
+  - port: 80         # Port exposed externally
+    targetPort: 8080 # Port to forward to inside the pods
+  
+  # Select which pods to send traffic to
+  selector:
+    app: task-schedulart # Route traffic to pods with this label
