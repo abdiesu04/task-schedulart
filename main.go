@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -12,6 +13,15 @@ import (
 	"github.com/task-schedulart/services"
 	"go.uber.org/zap"
 )
+
+// convertToUint converts string ID to uint and handles errors
+func convertToUint(id string) (uint, error) {
+	num, err := strconv.ParseUint(id, 10, 32)
+	if err != nil {
+		return 0, fmt.Errorf("invalid ID format: %v", err)
+	}
+	return uint(num), nil
+}
 
 func main() {
 	// Initialize logger
@@ -81,7 +91,12 @@ func main() {
 
 			// Update task status
 			tasks.PUT("/:id/status", func(c *gin.Context) {
-				taskID := c.Param("id")
+				taskID, err := convertToUint(c.Param("id"))
+				if err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+					return
+				}
+
 				var req struct {
 					Status string `json:"status"`
 				}
@@ -102,7 +117,12 @@ func main() {
 
 			// Retry failed task
 			tasks.POST("/:id/retry", func(c *gin.Context) {
-				taskID := c.Param("id")
+				taskID, err := convertToUint(c.Param("id"))
+				if err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+					return
+				}
+
 				if err := taskService.RetryFailedTask(taskID); err != nil {
 					logger.Error("Failed to retry task", zap.Error(err))
 					c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -114,7 +134,12 @@ func main() {
 
 			// Delete task
 			tasks.DELETE("/:id", func(c *gin.Context) {
-				taskID := c.Param("id")
+				taskID, err := convertToUint(c.Param("id"))
+				if err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+					return
+				}
+
 				if err := taskService.DeleteTask(taskID); err != nil {
 					logger.Error("Failed to delete task", zap.Error(err))
 					c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
