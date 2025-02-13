@@ -1,7 +1,7 @@
 # Task Schedulart 📅
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/yourusername/task-schedulart)](https://goreportcard.com/report/github.com/yourusername/task-schedulart)
-[![GoDoc](https://godoc.org/github.com/yourusername/task-schedulart?status.svg)](https://godoc.org/github.com/yourusername/task-schedulart)
+[![Go Report Card](https://goreportcard.com/badge/github.com/abdiesu04/task-schedulart)](https://goreportcard.com/report/github.com/abdiesu04/task-schedulart)
+[![GoDoc](https://godoc.org/github.com/abdiesu04/task-schedulart?status.svg)](https://godoc.org/github.com/abdiesu04/task-schedulart)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <div align="center">
@@ -11,22 +11,40 @@
 
 ## 🌟 Features
 
-- **🔄 Task Management**
+- **🔄 Advanced Task Management**
   - Create, schedule, and manage tasks
   - Priority-based scheduling
-  - Task retry mechanism
-  - Tag-based organization
+  - Task retry mechanism with exponential backoff
+  - Smart tag-based organization
+  - Task dependencies and workflows
+  - Recurring tasks (cron-style scheduling)
+  - Task templates for quick creation
 
-- **☁️ Cloud-Native**
+- **☁️ Enterprise-Ready**
   - Built with modern Go practices
   - Docker and Kubernetes ready
   - Horizontally scalable
+  - Rate limiting and throttling
+  - Circuit breaker pattern
+  - Distributed task locking
 
 - **📊 Advanced Features**
-  - RESTful API
-  - Real-time status updates
+  - RESTful API with OpenAPI/Swagger
+  - Real-time WebSocket updates
   - Flexible filtering and sorting
-  - Metadata support
+  - Rich metadata support
+  - Task progress tracking
+  - Batch operations
+  - Export to CSV/Excel
+
+- **🔒 Security & Monitoring**
+  - JWT Authentication
+  - Role-based access control
+  - Audit logging
+  - Prometheus metrics
+  - Grafana dashboards
+  - Health checks
+  - Performance analytics
 
 ## 🚀 Quick Start
 
@@ -41,7 +59,7 @@
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/task-schedulart.git
+git clone https://github.com/abdiesu04/task-schedulart.git
 cd task-schedulart
 ```
 
@@ -149,8 +167,19 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 
 ## 🗺️ Roadmap
 
-- [ ] User Authentication
+- [x] Basic Task Management
+- [x] Docker Support
+- [ ] WebSocket Real-time Updates
 - [ ] Task Dependencies
-- [ ] WebSocket Support
-- [ ] Advanced Scheduling Patterns
-- [ ] Metrics Dashboard 
+- [ ] Recurring Tasks
+- [ ] User Authentication
+- [ ] Task Templates
+- [ ] Mobile App
+- [ ] Email Notifications
+- [ ] Slack Integration
+- [ ] Analytics Dashboard
+- [ ] Task Import/Export
+- [ ] API Rate Limiting
+- [ ] Task Comments & Collaboration
+- [ ] SLA Monitoring
+- [ ] Multi-tenant Support 
